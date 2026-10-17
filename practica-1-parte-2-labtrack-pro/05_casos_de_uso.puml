@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor "Administrador del laboratorio" as Admin
+actor "Encargado del laboratorio" as Enc
+actor "Alumno" as Alum
+actor "Tecnico de mantenimiento" as Tec
+rectangle "LabTrack Pro" {
+  usecase "UC01 Registrar equipo" as UC01
+  usecase "UC02 Actualizar inventario" as UC02
+  usecase "UC03 Registrar alumno" as UC03
+  usecase "UC04 Crear prestamo" as UC04
+  usecase "UC05 Registrar devolucion" as UC05
+  usecase "UC06 Consultar prestamos" as UC06
+  usecase "UC07 Registrar mantenimiento" as UC07
+  usecase "UC08 Consultar equipo" as UC08
+  usecase "UC09 Generar reportes" as UC09
+}
+Admin -- UC01
+Admin -- UC02
+Admin -- UC03
+Admin -- UC09
+Enc -- UC03
+Enc -- UC04
+Enc -- UC05
+Enc -- UC06
+Enc -- UC08
+Tec -- UC07
+Tec -- UC08
+Alum -- UC08
+Alum -- UC06
+@enduml

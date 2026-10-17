@@ -1,0 +1,43 @@
+@startuml
+!theme plain
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+hide circle
+entity "EQUIPOS_LAB" as E {
+ * id_equipo : INT <<PK>>
+ --
+ * num_inventario : VARCHAR(30) <<UNIQUE>>
+ * tipo : ENUM
+ * marca : VARCHAR(60)
+ * modelo : VARCHAR(100)
+ * ubicacion : VARCHAR(80)
+ * estado : ENUM
+}
+entity "ALUMNOS" as A {
+ * id_alumno : INT <<PK>>
+ --
+ * nombre : VARCHAR(100)
+ * matricula : VARCHAR(20) <<UNIQUE>>
+ * carrera : VARCHAR(100)
+}
+entity "PRESTAMOS" as P {
+ * id_prestamo : INT <<PK>>
+ --
+ * fecha_prestamo : DATETIME
+   fecha_devolucion : DATETIME (nullable)
+ * id_equipo : INT <<FK>>
+ * id_alumno : INT <<FK>>
+}
+entity "MANTENIMIENTOS" as M {
+ * id_mantenimiento : INT <<PK>>
+ --
+ * fecha : DATE
+ * descripcion : VARCHAR(255)
+ * costo : DECIMAL(10,2)
+ * tipo_mant : ENUM
+ * id_equipo : INT <<FK>>
+}
+E ||--o{ P : "registra"
+A ||--o{ P : "solicita"
+E ||--o{ M : "recibe"
+@enduml
